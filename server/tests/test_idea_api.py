@@ -84,19 +84,30 @@ def test_get_all_ideas(client: FlaskClient):
     create_new_idea(client, tags=["a", "b", "c"])  # Insert first idea
     create_new_idea(client, tags=["a", "b"])  # Insert second idea
     create_new_idea(client, tags=["a"])  # Insert second idea
+    create_new_idea(client, tags=["d"])  # Insert second idea
     
-    # Retrieve all ideas with the specified tag using the API
-    response = client.post("/ideas", query_string={"tag": ["a"]})
+    # Retrieve all ideas using the API
+    response = client.get("/ideas")
     
     # Assert response status code and check returned ideas
     assert response.status_code == 200
     response_data = response.get_json()
     
-    # Ensure two ideas were returned
+    # Ensure all ideas were returned
+    assert len(response_data["ideas"]) == 4
+
+    # Retrieve all ideas with the specified tag using the API
+    response = client.get("/ideas", query_string={"tag": ["a"]})
+    
+    # Assert response status code and check returned ideas
+    assert response.status_code == 200
+    response_data = response.get_json()
+    
+    # Ensure three ideas were returned
     assert len(response_data["ideas"]) == 3
 
     # Retrieve all ideas with the specified tag using the API
-    response = client.post("/ideas", query_string={"tag": ["b", "c"]})
+    response = client.get("/ideas", query_string={"tag": ["b", "c"]})
     
     # Assert response status code and check returned ideas
     assert response.status_code == 200

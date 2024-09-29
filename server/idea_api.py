@@ -46,12 +46,13 @@ def get_idea(id: str):
         return jsonify(f"Idea with id '{id}' was not found"), 404
     return jsonify({"idea": result})
 
-@server.route("/ideas", methods=["POST"])
+@server.route("/ideas", methods=["GET"])
 def get_all():
     tags = request.args.getlist("tag")
-    if tags is []:
+    if not tags:
         result = collection.find({}, {"_id": 0})
-    result = collection.find({"tags": {"$in": tags}}, {"_id": 0})
+    else:
+        result = collection.find({"tags": {"$in": tags}}, {"_id": 0})
     return jsonify({"ideas": list(result)})
 
 
