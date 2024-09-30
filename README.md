@@ -2,6 +2,12 @@
 
 Rest API that allows users to create, retrieve, and manage ideas. The application uses MongoDB as the database to store ideas and their details.
 
+Idea is made of:
+    owner_id: the id of the owner who create the idea 
+    subject: the subject of the idea
+    details: the details of the idea
+    tags: list of string that categoriesed the idea
+    
 ## Features
 
 - Create new ideas with unique identifiers.
