@@ -1,6 +1,6 @@
 # Idea Management API
 
-A simple Flask application that allows users to create, retrieve, and manage ideas. The application uses MongoDB as the database to store ideas and their details.
+Rest API that allows users to create, retrieve, and manage ideas. The application uses MongoDB as the database to store ideas and their details.
 
 ## Features
 
