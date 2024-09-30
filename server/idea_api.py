@@ -29,7 +29,7 @@ def validate_json_schema(json: dict, cls: Type):
         return None, e.json()
     return instance.__dict__, ""
     
-@server.route("/idea/create", methods=["POST"])
+@server.route("/idea", methods=["POST"])
 def create():
     json = request.json
     id = str(uuid4())
