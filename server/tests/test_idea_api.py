@@ -60,7 +60,6 @@ def test_create_idea_invalid_data(client: FlaskClient):
     assert "error" in response_data
 
 def test_get_idea_success(client: FlaskClient):
-    # Insert a new idea through the API
     idea_id = create_new_idea(client)
     
     # Retrieve the inserted idea using the API
