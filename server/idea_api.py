@@ -21,6 +21,7 @@ def set_mongo_client(mongo_client: MongoClient):
     collection = mongo_client.get_database("brain_storm").get_collection("ideas")
 
 def validate_json_schema(json: dict, cls: Type):
+    # validate that the accepted json is cintaining all the data nedded
     instance = None
     try:
         instance = cls(**json)
