@@ -26,7 +26,7 @@ def create_new_idea(client: FlaskClient, tags=["test"]):
         "details": "Test idea details",
         "tags": tags
     }
-    response = client.post("/idea/create", data=json.dumps(data), content_type="application/json")
+    response = client.post("/idea", data=json.dumps(data), content_type="application/json")
     return response.get_json()["id"]
 
 def test_create_idea_success(client: FlaskClient):
@@ -38,7 +38,7 @@ def test_create_idea_success(client: FlaskClient):
         "tags": ["tag1", "tag2"]
     }
     
-    response = client.post("/idea/create", data=json.dumps(data), content_type="application/json")
+    response = client.post("/idea", data=json.dumps(data), content_type="application/json")
     
     # Assert response status code and check for 'id' in response
     assert response.status_code == 201
@@ -52,7 +52,7 @@ def test_create_idea_invalid_data(client: FlaskClient):
         "details": "Details about the idea"
     }
     
-    response = client.post("/idea/create", data=json.dumps(data), content_type="application/json")
+    response = client.post("/idea", data=json.dumps(data), content_type="application/json")
     
     # Assert response status code and error message for invalid data
     assert response.status_code == 400
