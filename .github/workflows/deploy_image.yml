@@ -1,0 +1,27 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to the branch you want to trigger the workflow on
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Log in to Docker registry
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ${{ secrets.DOCKER_REGISTRY }} -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    # Build the Docker image
+    - name: Build Docker image
+      run: docker build --build-arg USER_MONGODB_URI=${{ secrets.MONGODB_URI }} -t ${{ secrets.DOCKER_REGISTRY }}/akivazo/idea_api:latest .
+
+    # Push the Docker image
+    - name: Push Docker image
+      run: docker push ${{ secrets.DOCKER_REGISTRY }}/akivazo/idea_api:latest
