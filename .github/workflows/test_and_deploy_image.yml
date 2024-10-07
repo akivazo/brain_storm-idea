@@ -46,9 +46,8 @@ jobs:
     - name: Build Docker image
       env:
         USER_MONGODB_URI: ${{ secrets.MONGODB_URI }}
-        DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-      run: docker build --build-arg USER_MONGODB_URI=$USER_MONGODB_URI -t $DOCKER_REGISTRY/akivazo/idea_api:latest .
+      run: docker build --build-arg USER_MONGODB_URI=$USER_MONGODB_URI -t ${{ secrets.DOCKER_REGISTRY }}/akivazo/brain_storm_idea_api:latest .
 
     # Push the Docker image
     - name: Push Docker image
-      run: docker push ${{ secrets.DOCKER_REGISTRY }}/akivazo/idea_api:latest
+      run: docker push ${{ secrets.DOCKER_REGISTRY }}/akivazo/brain_storm_idea_api:latest
