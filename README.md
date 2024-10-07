@@ -50,7 +50,7 @@ Status 200: Idea found
     "owner_id": "your_owner_id",
     "subject": "Your idea subject",
     "details": "Detailed description of the idea",
-    "tags": ["tag1", "tag2"]
+    "tags": ["tag1", "tag2", "tag3"]
   }
 }
 Status 404: Idea not found
