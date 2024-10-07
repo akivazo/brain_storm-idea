@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field, ValidationError
 from typing import List
 from uuid import uuid4
 from typing import Type
+from flask_cors import CORS
 
 class Idea(BaseModel):
     id: str
@@ -13,6 +14,7 @@ class Idea(BaseModel):
     tags: List[str] = Field(default_factory=list)
 
 server = Flask(__name__)
+CORS(server)
 collection = None
 
 

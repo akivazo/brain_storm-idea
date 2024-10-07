@@ -13,4 +13,7 @@ COPY . /app/
 
 EXPOSE 5000
 
+ARG IDEA_MONGODB_URI
+ENV IDEA_MONGODB_URI=${IDEA_MONGODB_URI}
+
 CMD ["python", "run_api.py"]
