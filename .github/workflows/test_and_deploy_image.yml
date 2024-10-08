@@ -44,7 +44,6 @@ jobs:
 
     # Build the Docker image
     - name: Build Docker image
-      env:
       run: docker build -t ${{ secrets.DOCKER_REGISTRY }}/akivazo/brain_storm_idea_api:latest .
 
     # Push the Docker image
