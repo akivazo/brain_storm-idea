@@ -21,7 +21,7 @@ def create_new_idea(client: FlaskClient, tags=["test"]):
     Helper function to create a new idea through the API.
     """
     data = {
-        "owner_id": "owner123",
+        "owner_name": "owner123",
         "subject": "Test Idea",
         "details": "Test idea details",
         "tags": tags
@@ -32,7 +32,7 @@ def create_new_idea(client: FlaskClient, tags=["test"]):
 def test_create_idea_success(client: FlaskClient):
     # Create valid idea data
     data = {
-        "owner_id": "owner123",
+        "owner_name": "owner123",
         "subject": "New Idea",
         "details": "Details about the idea",
         "tags": ["tag1", "tag2"]
