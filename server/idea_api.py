@@ -8,7 +8,7 @@ from flask_cors import CORS
 
 class Idea(BaseModel):
     id: str
-    owner_id: str
+    owner_name: str
     subject: str
     details: str
     tags: List[str] = Field(default_factory=list)
