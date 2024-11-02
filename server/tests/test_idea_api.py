@@ -27,7 +27,7 @@ def create_new_idea(client: FlaskClient, tags=["test"]):
         "tags": tags
     }
     response = client.post("/idea", data=json.dumps(data), content_type="application/json")
-    return response.get_json()["id"]
+    return response.get_json()["idea"]["id"]
 
 def test_create_idea_success(client: FlaskClient):
     # Create valid idea data
@@ -42,8 +42,10 @@ def test_create_idea_success(client: FlaskClient):
     
     # Assert response status code and check for 'id' in response
     assert response.status_code == 201
-    response_data = response.get_json()
-    assert "id" in response_data
+    idea = response.get_json()["idea"]
+    for key in data.keys():
+        assert key in idea
+    assert "id" in idea
 
 def test_create_idea_invalid_data(client: FlaskClient):
     # Create invalid idea data (missing required fields)

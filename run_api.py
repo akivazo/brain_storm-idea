@@ -7,5 +7,5 @@ if __name__ == "__main__":
     uri = os.environ["IDEA_MONGODB_URI"]
     mongo_client = MongoClient(uri)
     set_mongo_client(mongo_client=mongo_client)
-    waitress.serve(server, host="0.0.0.0", port=5000, threads=1)
+    waitress.serve(server, host="0.0.0.0", port=5000)
     mongo_client.close()
