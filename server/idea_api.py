@@ -40,7 +40,8 @@ def create():
     if not result:
         return jsonify(message), 400 
     collection.insert_one(result)
-    return {"id": id}, 201
+    del result["_id"]
+    return jsonify({"idea": result}), 201
 
 @server.route("/idea/<id>", methods=["GET"])
 def get_idea(id: str):
