@@ -13,6 +13,7 @@ class Idea(BaseModel):
     owner_name: str
     subject: str
     details: str
+    favorites: int
     tags: List[str] = Field(default_factory=list)
 
 server = Flask(__name__)
@@ -40,6 +41,7 @@ def create():
     json["id"] = id
     timestamp = str(int(time.time()))
     json["time_created"] = timestamp
+    json["favorites"] = 0
     result, message = validate_json_schema(json, Idea)
     if not result:
         return jsonify(message), 400 
@@ -69,6 +71,16 @@ def delete_idea(id: str):
     collection.delete_one({"id": id})
     return "", 204
 
+@server.route("/favorite/<idea_id>", methods=["POST"])
+def add_favortie(idea_id):
+    collection.update_one({"id": idea_id}, {"$inc": {"favorites": 1}})
+    return "", 200
+
+@server.route("/favorite/<idea_id>", methods=["DELETE"])
+def remove_favortie(idea_id):
+    collection.update_one({"id": idea_id}, {"$inc": {"favorites": -1}})
+    return "", 200
+    
 if __name__ == "__main__":
     import dotenv, os
     dotenv.load_dotenv()
