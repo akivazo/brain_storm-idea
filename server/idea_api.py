@@ -5,9 +5,11 @@ from typing import List
 from uuid import uuid4
 from typing import Type
 from flask_cors import CORS
+import time
 
 class Idea(BaseModel):
     id: str
+    time_created: str # UTC seconds count
     owner_name: str
     subject: str
     details: str
@@ -36,6 +38,8 @@ def create():
     json = request.json
     id = str(uuid4())
     json["id"] = id
+    timestamp = str(time.time())
+    json["time_created"] = timestamp
     result, message = validate_json_schema(json, Idea)
     if not result:
         return jsonify(message), 400 
