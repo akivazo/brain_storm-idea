@@ -38,7 +38,7 @@ def create():
     json = request.json
     id = str(uuid4())
     json["id"] = id
-    timestamp = str(time.time())
+    timestamp = str(int(time.time()))
     json["time_created"] = timestamp
     result, message = validate_json_schema(json, Idea)
     if not result:
