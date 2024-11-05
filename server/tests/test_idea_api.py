@@ -46,6 +46,7 @@ def test_create_idea_success(client: FlaskClient):
     for key in data.keys():
         assert key in idea
     assert "id" in idea
+    assert "time_created" in idea
 
 def test_create_idea_invalid_data(client: FlaskClient):
     # Create invalid idea data (missing required fields)
