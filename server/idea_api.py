@@ -9,7 +9,7 @@ import time
 
 class Idea(BaseModel):
     id: str
-    time_created: str # UTC seconds count
+    time_created: int # UTC seconds count
     owner_name: str
     subject: str
     details: str
@@ -39,7 +39,7 @@ def create():
     json = request.json
     id = str(uuid4())
     json["id"] = id
-    timestamp = str(int(time.time()))
+    timestamp = int(time.time())
     json["time_created"] = timestamp
     json["favorites"] = 0
     result, message = validate_json_schema(json, Idea)
