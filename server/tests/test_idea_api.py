@@ -131,3 +131,33 @@ def test_delete_idea(client: FlaskClient):
     # Ensure idea no longer exists
     get_response = client.get(f"/idea/{idea_id}")
     assert get_response.status_code == 404
+
+def test_favorite(client: FlaskClient):
+    idea_id = create_new_idea(client)
+
+    response = client.post(f"/favorite/{idea_id}")
+    response = client.post(f"/favorite/{idea_id}")
+
+    response = client.get(f"/idea/{idea_id}")
+
+    assert response.status_code == 200
+
+    idea = response.get_json()["idea"]
+
+    assert idea["favorites"] == 2
+
+    response = client.delete(f"/favorite/{idea_id}")
+
+    response = client.get(f"/idea/{idea_id}")
+    assert response.status_code == 200
+    idea = response.get_json()["idea"]
+
+    assert idea["favorites"] == 1
+
+    response = client.delete(f"/favorite/{idea_id}")
+
+    response = client.get(f"/idea/{idea_id}")
+    assert response.status_code == 200
+    idea = response.get_json()["idea"]
+
+    assert idea["favorites"] == 0
